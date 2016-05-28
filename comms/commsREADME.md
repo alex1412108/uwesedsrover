@@ -1,0 +1,1 @@
+the rover will communicate via wifi

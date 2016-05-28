@@ -1,0 +1,1 @@
+core system for the rover
