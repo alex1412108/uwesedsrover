@@ -1,2 +1,2 @@
-# uwesesrover2016
-ukurc 2016 competition
+# uwesesrover
+LRC 2018 competition
