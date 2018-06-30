@@ -23,7 +23,7 @@ def main():
             print(input_bytes)
             SERIAL.write(input_bytes)
     except KeyboardInterrupt:
-
+        pass
 
 
 def serialise_inputs(inputs):
