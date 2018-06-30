@@ -27,12 +27,12 @@ def main():
 
 
 def serialise_inputs(inputs):
-    result = b''
+    result = bytearray()
     for field in inputs.DESCRIPTOR.fields_by_name:
         value = getattr(inputs, field)
         if field in ['left_x_axis', 'left_y_axis', 'right_x_axis', 'right_y_axis']:
             value += 128
-        result += chr(value).encode('ascii', errors='replace')
+        result.append(value)
     return result
 
 
