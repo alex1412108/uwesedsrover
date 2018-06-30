@@ -4,14 +4,13 @@ import inputs_pb2
 import socket
 import struct
 import serial
-SERIAL = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+SERIAL = serial.Serial('/dev/serial0', 9600, timeout=1)
 
 def main():
     try:
         server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         server.bind(('', 8081))
         server.listen(5)
-        SERIAL.open()
         while True:
             connection, address = server.accept()
             data_length = struct.unpack('H', connection.recv(2))[0]
@@ -24,7 +23,6 @@ def main():
             print(input_bytes)
             SERIAL.write(input_bytes)
     except KeyboardInterrupt:
-        SERIAL.close()
 
 
 
