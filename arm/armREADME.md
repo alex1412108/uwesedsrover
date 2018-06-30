@@ -1,1 +1,0 @@
-robot arm on the rover

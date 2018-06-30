@@ -1,0 +1,92 @@
+--- 
+- 
+  index: 3
+  mapping: 16
+  name: a
+- 
+  index: 3
+  mapping: 32
+  name: b
+- 
+  index: 3
+  mapping: 64
+  name: x
+- 
+  index: 3
+  mapping: 128
+  name: y
+- 
+  index: 3
+  mapping: 2
+  name: right bumper
+- 
+  index: 3
+  mapping: 1
+  name: left bumper
+- 
+  index: 3
+  mapping: 4
+  name: menu
+- 
+  index: 4
+  name: left trigger
+-
+  index: 5
+  name: right trigger
+-
+  index: 2
+  mapping: 1
+  name: up
+-
+  index: 2
+  mapping: 8
+  name: right
+-
+  index: 2
+  mapping: 2
+  name: down
+-
+  index: 2
+  mapping: 4
+  name: left
+-
+  index: 2
+  mapping: 64
+  name: left stick
+-
+  index: 2
+  mapping: 128
+  name: right stick
+-
+  index: 7
+  interpolation: 
+    - from_start: 128
+      from_end: 255
+      to_start: -128
+      to_end: -1
+  name: left x axis
+-
+  index: 9
+  interpolation: 
+    - from_start: 128
+      from_end: 255
+      to_start: -128
+      to_end: -1
+  name: left y axis
+-
+  index: 11
+  interpolation: 
+    - from_start: 128
+      from_end: 255
+      to_start: -128
+      to_end: -1
+  name: right x axis
+-
+  index: 13
+  interpolation: 
+    - from_start: 128
+      from_end: 255
+      to_start: -128
+      to_end: -1
+  name: right y axis
+

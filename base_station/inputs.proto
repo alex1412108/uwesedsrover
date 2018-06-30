@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+message Input {
+  bool a = 1;
+  bool b = 2;
+  bool x = 3;
+  bool y = 4;
+  bool right_bumper = 5;
+  bool left_bumper = 6;
+  bool menu = 7;
+  int32 left_trigger = 8;
+  int32 right_trigger = 9;
+  bool up = 10;
+  bool right = 11;
+  bool down = 12;
+  bool left = 13;
+  bool left_stick = 14;
+  bool right_stick = 15;
+  int32 left_x_axis = 16;
+  int32 left_y_axis = 17;
+  int32 right_x_axis = 18;
+  int32 right_y_axis = 19;
+}
+
