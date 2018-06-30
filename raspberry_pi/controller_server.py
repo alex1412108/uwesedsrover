@@ -32,7 +32,7 @@ def serialise_inputs(inputs):
         value = getattr(inputs, field)
         if field in ['left_x_axis', 'left_y_axis', 'right_x_axis', 'right_y_axis']:
             value += 128
-        result.append(value)
+        result.append(min(value, 255))  # Bug where axis are sometimes 255.
     return result
 
 
