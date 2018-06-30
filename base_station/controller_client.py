@@ -20,9 +20,9 @@ def main():
         raise error
 
     # Find the first connected Xbox controller.
-    device = usb.core.find(idVendor=config['vendor_id'],
-                           idProduct=config['product_id'])
-    if not device:
+    device = usb.core.find(idVendor=int(config['vendor_id']),
+                           idProduct=int(config['product_id']))
+    if device is None:
         raise Exception('Unable to find an Xbox controller.')
 
     # Reclaim device from other driver.
