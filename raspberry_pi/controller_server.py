@@ -28,7 +28,7 @@ def main():
 
 def serialise_inputs(inputs):
     result = bytearray()
-    for field in inputs.DESCRIPTOR.fields_by_name:
+    for field in map(lambda f: f.name, inputs.DESCRIPTOR.fields):
         value = getattr(inputs, field)
         if field in ['left_x_axis', 'left_y_axis', 'right_x_axis', 'right_y_axis']:
             value += 128
