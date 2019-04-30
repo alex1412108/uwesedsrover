@@ -65,7 +65,7 @@ def get_yaml(path):
     content, error = None, None
     with open(path) as stream:
         try:
-            content = yaml.load(stream)
+            content = yaml.safe_load(stream)
         except yaml.YAMLError as exception:
             error = exception
     return content, error
