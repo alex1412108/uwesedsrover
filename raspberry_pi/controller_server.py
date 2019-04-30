@@ -4,13 +4,21 @@ import inputs_pb2
 import socket
 import struct
 import serial
-SERIAL = serial.Serial('/dev/serial0', 9600, timeout=1)
+import pjon_cython as pjon
+
+class ThroughSerial(pjon.ThroughSerial):
+    def recieve(self, data, length, packet_info):
+        print('recieve ({}): {}'.format(length, data))
+
+
+SERIAL = ThroughSerial(1, '/dev/serial0', 115200)
 
 def main():
     try:
         server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         server.bind(('', 8081))
         server.listen(5)
+        SERIAL.begin()
         while True:
             connection, address = server.accept()
             data_length = struct.unpack('H', connection.recv(2))[0]
@@ -21,7 +29,11 @@ def main():
             print(inputs)
             input_bytes = serialise_inputs(inputs)
             print(input_bytes)
-            SERIAL.write(input_bytes)
+
+            SERIAL.send(input_bytes)
+            SERIAL.update()
+            SERIAL.recieve()
+        SERIAL.end()
     except KeyboardInterrupt:
         pass
 
