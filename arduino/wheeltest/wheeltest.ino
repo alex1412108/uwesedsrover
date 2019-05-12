@@ -119,7 +119,7 @@ digitalWrite(SHDN12V, HIGH); //turns on the 12V power line, set LOW to turn off 
 
 digitalWrite(MOTOR_SLEEP, HIGH);
 digitalWrite(MOTOR_RESET, HIGH);
-digitalWrite(MOTOR_DECAY, LOW);
+digitalWrite(MOTOR_DECAY, HIGH);
 
 
 }
@@ -285,8 +285,8 @@ void control_motor_pwm(int pin0, int pin1, char value) {
     digitalWrite(pin0, 0);
     analogWrite(pin1, 255 - ((int)value * 2));
   } else {
-    digitalWrite(pin0, 1);
-    digitalWrite(pin1, 1);
+    digitalWrite(pin0, 0);
+    digitalWrite(pin1, 0);
   }
 }
 
