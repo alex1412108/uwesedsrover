@@ -134,23 +134,96 @@ void loop() {
   } */
   
 
-    // motors high
+    // enumerate through motors
+
+    //test wheel RF
     control_motor_pwm(MOTOR_RF_0, MOTOR_RF_1, 0);
+    control_motor_pwm(MOTOR_RB_0, MOTOR_RB_1, 120);
+    control_motor_pwm(MOTOR_LF_0, MOTOR_LF_1, 120);
+    control_motor_pwm(MOTOR_LB_0, MOTOR_LB_1, 120);
+    Serial.write(MOTOR_FAULT1);
+    Serial.write(MOTOR_FAULT2);
+    Serial.write(MOTOR_FAULT3);
+    Serial.write("\n");
+    delay(2000);
+
+    //test wheel RF
+    control_motor_pwm(MOTOR_RF_0, MOTOR_RF_1, 255);
+    control_motor_pwm(MOTOR_RB_0, MOTOR_RB_1, 120);
+    control_motor_pwm(MOTOR_LF_0, MOTOR_LF_1, 120);
+    control_motor_pwm(MOTOR_LB_0, MOTOR_LB_1, 120);
+    Serial.write(MOTOR_FAULT1);
+    Serial.write(MOTOR_FAULT2);
+    Serial.write(MOTOR_FAULT3);
+    Serial.write("\n");
+    delay(2000);
+
+    //test wheel RB
+    control_motor_pwm(MOTOR_RF_0, MOTOR_RF_1, 120);
     control_motor_pwm(MOTOR_RB_0, MOTOR_RB_1, 0);
+    control_motor_pwm(MOTOR_LF_0, MOTOR_LF_1, 120);
+    control_motor_pwm(MOTOR_LB_0, MOTOR_LB_1, 120);
+    Serial.write(MOTOR_FAULT1);
+    Serial.write(MOTOR_FAULT2);
+    Serial.write(MOTOR_FAULT3);
+    Serial.write("\n");
+    delay(2000);
+
+    //test wheel RB
+    control_motor_pwm(MOTOR_RF_0, MOTOR_RF_1, 120);
+    control_motor_pwm(MOTOR_RB_0, MOTOR_RB_1, 255);
+    control_motor_pwm(MOTOR_LF_0, MOTOR_LF_1, 120);
+    control_motor_pwm(MOTOR_LB_0, MOTOR_LB_1, 120);
+    Serial.write(MOTOR_FAULT1);
+    Serial.write(MOTOR_FAULT2);
+    Serial.write(MOTOR_FAULT3);
+    Serial.write("\n");
+    delay(2000);
+
+    //test wheel LF
+    control_motor_pwm(MOTOR_RF_0, MOTOR_RF_1, 120);
+    control_motor_pwm(MOTOR_RB_0, MOTOR_RB_1, 120);
     control_motor_pwm(MOTOR_LF_0, MOTOR_LF_1, 0);
+    control_motor_pwm(MOTOR_LB_0, MOTOR_LB_1, 120);
+    Serial.write(MOTOR_FAULT1);
+    Serial.write(MOTOR_FAULT2);
+    Serial.write(MOTOR_FAULT3);
+    Serial.write("\n");
+    delay(2000);
+
+    //test wheel LF
+    control_motor_pwm(MOTOR_RF_0, MOTOR_RF_1, 120);
+    control_motor_pwm(MOTOR_RB_0, MOTOR_RB_1, 120);
+    control_motor_pwm(MOTOR_LF_0, MOTOR_LF_1, 255);
+    control_motor_pwm(MOTOR_LB_0, MOTOR_LB_1, 120);
+    Serial.write(MOTOR_FAULT1);
+    Serial.write(MOTOR_FAULT2);
+    Serial.write(MOTOR_FAULT3);
+    Serial.write("\n");
+    delay(2000);
+
+    //test wheel LB
+    control_motor_pwm(MOTOR_RF_0, MOTOR_RF_1, 120);
+    control_motor_pwm(MOTOR_RB_0, MOTOR_RB_1, 120);
+    control_motor_pwm(MOTOR_LF_0, MOTOR_LF_1, 120);
     control_motor_pwm(MOTOR_LB_0, MOTOR_LB_1, 0);
     Serial.write(MOTOR_FAULT1);
     Serial.write(MOTOR_FAULT2);
     Serial.write(MOTOR_FAULT3);
     Serial.write("\n");
     delay(2000);
-    //motors low
-    //control_motor_pwm(MOTOR_RF_0, MOTOR_RF_1, 0);
-    //control_motor_pwm(MOTOR_RB_0, MOTOR_RB_1, 0);
-    //control_motor_pwm(MOTOR_LF_0, MOTOR_LF_1, 0);
-    //control_motor_pwm(MOTOR_LB_0, MOTOR_LB_1, 0);
-    //delay(2000);
-  
+
+    //test wheel LB
+    control_motor_pwm(MOTOR_RF_0, MOTOR_RF_1, 120);
+    control_motor_pwm(MOTOR_RB_0, MOTOR_RB_1, 120);
+    control_motor_pwm(MOTOR_LF_0, MOTOR_LF_1, 120);
+    control_motor_pwm(MOTOR_LB_0, MOTOR_LB_1, 255);
+    Serial.write(MOTOR_FAULT1);
+    Serial.write(MOTOR_FAULT2);
+    Serial.write(MOTOR_FAULT3);
+    Serial.write("\n");
+    delay(2000);
+    
 }
 
 
@@ -207,13 +280,13 @@ void set_status_light() {
 void control_motor_pwm(int pin0, int pin1, char value) {
   if (value > 137) {
     analogWrite(pin0, ((int)value - 127) * 2 - 1);
-    analogWrite(pin1, 0);
+    digitalWrite(pin1, 0);
   } else if (value < 117) {
-    analogWrite(pin0, 0);
+    digitalWrite(pin0, 0);
     analogWrite(pin1, 255 - ((int)value * 2));
   } else {
-    analogWrite(pin0, 0);
-    analogWrite(pin1, 0);
+    digitalWrite(pin0, 1);
+    digitalWrite(pin1, 1);
   }
 }
 
