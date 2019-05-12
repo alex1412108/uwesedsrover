@@ -111,10 +111,19 @@ pinMode(MOTOR_FAULT1, INPUT);
 pinMode(MOTOR_FAULT2, INPUT);
 pinMode(MOTOR_FAULT3, INPUT);
 
+
+//initialze start settings
 digitalWrite(SHDN6V, LOW);  //turns off the 6V power line, set HIGH to turn on if needed
 // 12V power line control from the arduino can only be done if the arduino is powered externaly from the motor board
 digitalWrite(SHDN12V, HIGH); //turns on the 12V power line, set LOW to turn off if not needed.
+
+digitalWrite(MOTOR_SLEEP, HIGH);
+digitalWrite(MOTOR_RESET, HIGH);
+digitalWrite(MOTOR_DECAY, LOW);
+
+
 }
+
 
 
 void loop() {
@@ -124,24 +133,24 @@ void loop() {
     //wdt_reset();
   } */
   
-  recvWithStartEndMarkers();
+
+    // motors high
+    control_motor_pwm(MOTOR_RF_0, MOTOR_RF_1, 0);
+    control_motor_pwm(MOTOR_RB_0, MOTOR_RB_1, 0);
+    control_motor_pwm(MOTOR_LF_0, MOTOR_LF_1, 0);
+    control_motor_pwm(MOTOR_LB_0, MOTOR_LB_1, 0);
+    Serial.write(MOTOR_FAULT1);
+    Serial.write(MOTOR_FAULT2);
+    Serial.write(MOTOR_FAULT3);
+    Serial.write("\n");
+    delay(2000);
+    //motors low
+    //control_motor_pwm(MOTOR_RF_0, MOTOR_RF_1, 0);
+    //control_motor_pwm(MOTOR_RB_0, MOTOR_RB_1, 0);
+    //control_motor_pwm(MOTOR_LF_0, MOTOR_LF_1, 0);
+    //control_motor_pwm(MOTOR_LB_0, MOTOR_LB_1, 0);
+    //delay(2000);
   
-  if (NEW_INPUT == true) {
-    if (INPUTS[INPUT_A] == char(1)) {
-      digitalWrite(LED_BUILTIN, HIGH);  
-    } else {
-      digitalWrite(LED_BUILTIN, LOW);
-    }
-    // Update motor signals.
-    control_motor_pwm(MOTOR_RF_0, MOTOR_RF_1, INPUTS[INPUT_RY]);
-    control_motor_pwm(MOTOR_RB_0, MOTOR_RB_1, INPUTS[INPUT_RY]);
-    control_motor_pwm(MOTOR_LF_0, MOTOR_LF_1, INPUTS[INPUT_LY]);
-    control_motor_pwm(MOTOR_LB_0, MOTOR_LB_1, INPUTS[INPUT_LY]);
-  
-    // Update scoop signal.
-    //
-    NEW_INPUT = false;
-  }
 }
 
 
