@@ -137,91 +137,91 @@ void loop() {
     // enumerate through motors
 
     //test wheel RF
+    Serial.write("Right Front Reverse\n");
     control_motor(MOTOR_RF_0, MOTOR_RF_1, 0);
     control_motor(MOTOR_RB_0, MOTOR_RB_1, 120);
     control_motor(MOTOR_LF_0, MOTOR_LF_1, 120);
     control_motor(MOTOR_LB_0, MOTOR_LB_1, 120);
-    Serial.write(MOTOR_FAULT1);
-    Serial.write(MOTOR_FAULT2);
-    Serial.write(MOTOR_FAULT3);
-    Serial.write("\n");
+    if (MOTOR_FAULT1=LOW) Serial.write("Chip 1 Exceeded Temp or Current Limit\n");
+    if (MOTOR_FAULT2=LOW) Serial.write("Chip 2 Exceeded Temp or Current Limit\n");
+    if (MOTOR_FAULT3=LOW) Serial.write("Chip 3 Exceeded Temp or Current Limit\n");
     delay(5000);
 
     //test wheel RF
+    Serial.write("Right Front Forward\n");
     control_motor(MOTOR_RF_0, MOTOR_RF_1, 255);
     control_motor(MOTOR_RB_0, MOTOR_RB_1, 120);
     control_motor(MOTOR_LF_0, MOTOR_LF_1, 120);
     control_motor(MOTOR_LB_0, MOTOR_LB_1, 120);
-    Serial.write(MOTOR_FAULT1);
-    Serial.write(MOTOR_FAULT2);
-    Serial.write(MOTOR_FAULT3);
-    Serial.write("\n");
+    if (MOTOR_FAULT1=LOW) Serial.write("Chip 1 Exceeded Temp or Current Limit\n");
+    if (MOTOR_FAULT2=LOW) Serial.write("Chip 2 Exceeded Temp or Current Limit\n");
+    if (MOTOR_FAULT3=LOW) Serial.write("Chip 3 Exceeded Temp or Current Limit\n");
     delay(5000);
 
     //test wheel RB
+    Serial.write("Right Back Reverse\n");
     control_motor(MOTOR_RF_0, MOTOR_RF_1, 120);
     control_motor(MOTOR_RB_0, MOTOR_RB_1, 0);
     control_motor(MOTOR_LF_0, MOTOR_LF_1, 120);
     control_motor(MOTOR_LB_0, MOTOR_LB_1, 120);
-    Serial.write(MOTOR_FAULT1);
-    Serial.write(MOTOR_FAULT2);
-    Serial.write(MOTOR_FAULT3);
-    Serial.write("\n");
+    if (MOTOR_FAULT1=LOW) Serial.write("Chip 1 Exceeded Temp or Current Limit\n");
+    if (MOTOR_FAULT2=LOW) Serial.write("Chip 2 Exceeded Temp or Current Limit\n");
+    if (MOTOR_FAULT3=LOW) Serial.write("Chip 3 Exceeded Temp or Current Limit\n");
     delay(5000);
 
     //test wheel RB
+    Serial.write("Right Back Forward\n");
     control_motor(MOTOR_RF_0, MOTOR_RF_1, 120);
     control_motor(MOTOR_RB_0, MOTOR_RB_1, 255);
     control_motor(MOTOR_LF_0, MOTOR_LF_1, 120);
     control_motor(MOTOR_LB_0, MOTOR_LB_1, 120);
-    Serial.write(MOTOR_FAULT1);
-    Serial.write(MOTOR_FAULT2);
-    Serial.write(MOTOR_FAULT3);
-    Serial.write("\n");
+    if (MOTOR_FAULT1=LOW) Serial.write("Chip 1 Exceeded Temp or Current Limit\n");
+    if (MOTOR_FAULT2=LOW) Serial.write("Chip 2 Exceeded Temp or Current Limit\n");
+    if (MOTOR_FAULT3=LOW) Serial.write("Chip 3 Exceeded Temp or Current Limit\n");
     delay(5000);
 
     //test wheel LF
+    Serial.write("Left Front Reverse\n");
     control_motor(MOTOR_RF_0, MOTOR_RF_1, 120);
     control_motor(MOTOR_RB_0, MOTOR_RB_1, 120);
     control_motor(MOTOR_LF_0, MOTOR_LF_1, 0);
     control_motor(MOTOR_LB_0, MOTOR_LB_1, 120);
-    Serial.write(MOTOR_FAULT1);
-    Serial.write(MOTOR_FAULT2);
-    Serial.write(MOTOR_FAULT3);
-    Serial.write("\n");
+    if (MOTOR_FAULT1=LOW) Serial.write("Chip 1 Exceeded Temp or Current Limit\n");
+    if (MOTOR_FAULT2=LOW) Serial.write("Chip 2 Exceeded Temp or Current Limit\n");
+    if (MOTOR_FAULT3=LOW) Serial.write("Chip 3 Exceeded Temp or Current Limit\n");
     delay(5000);
 
     //test wheel LF
+    Serial.write("Left Front Forward\n");
     control_motor(MOTOR_RF_0, MOTOR_RF_1, 120);
     control_motor(MOTOR_RB_0, MOTOR_RB_1, 120);
     control_motor(MOTOR_LF_0, MOTOR_LF_1, 255);
     control_motor(MOTOR_LB_0, MOTOR_LB_1, 120);
-    Serial.write(MOTOR_FAULT1);
-    Serial.write(MOTOR_FAULT2);
-    Serial.write(MOTOR_FAULT3);
-    Serial.write("\n");
+    if (MOTOR_FAULT1=LOW) Serial.write("Chip 1 Exceeded Temp or Current Limit\n");
+    if (MOTOR_FAULT2=LOW) Serial.write("Chip 2 Exceeded Temp or Current Limit\n");
+    if (MOTOR_FAULT3=LOW) Serial.write("Chip 3 Exceeded Temp or Current Limit\n");
     delay(5000);
 
     //test wheel LB
+    Serial.write("Left Back Reverse\n");
     control_motor(MOTOR_RF_0, MOTOR_RF_1, 120);
     control_motor(MOTOR_RB_0, MOTOR_RB_1, 120);
     control_motor(MOTOR_LF_0, MOTOR_LF_1, 120);
     control_motor(MOTOR_LB_0, MOTOR_LB_1, 0);
-    Serial.write(MOTOR_FAULT1);
-    Serial.write(MOTOR_FAULT2);
-    Serial.write(MOTOR_FAULT3);
-    Serial.write("\n");
+    if (MOTOR_FAULT1=LOW) Serial.write("Chip 1 Exceeded Temp or Current Limit\n");
+    if (MOTOR_FAULT2=LOW) Serial.write("Chip 2 Exceeded Temp or Current Limit\n");
+    if (MOTOR_FAULT3=LOW) Serial.write("Chip 3 Exceeded Temp or Current Limit\n");
     delay(5000);
 
     //test wheel LB
+    Serial.write("Left Back Forward\n");
     control_motor(MOTOR_RF_0, MOTOR_RF_1, 120);
     control_motor(MOTOR_RB_0, MOTOR_RB_1, 120);
     control_motor(MOTOR_LF_0, MOTOR_LF_1, 120);
     control_motor(MOTOR_LB_0, MOTOR_LB_1, 255);
-    Serial.write(MOTOR_FAULT1);
-    Serial.write(MOTOR_FAULT2);
-    Serial.write(MOTOR_FAULT3);
-    Serial.write("\n");
+    if (MOTOR_FAULT1=LOW) Serial.write("Chip 1 Exceeded Temp or Current Limit\n");
+    if (MOTOR_FAULT2=LOW) Serial.write("Chip 2 Exceeded Temp or Current Limit\n");
+    if (MOTOR_FAULT3=LOW) Serial.write("Chip 3 Exceeded Temp or Current Limit\n");
     delay(5000);
     
 }
