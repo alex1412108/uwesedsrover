@@ -133,6 +133,12 @@ void loop() {
     //wdt_reset();
   } */
   
+    // reset driver chips
+    Serial.write("Resetting driver chips\n");
+    digitalWrite(MOTOR_RESET, LOW);
+    delay(1000);
+    digitalWrite(MOTOR_RESET, HIGH);
+    delay(1000);
 
     // enumerate through motors
 
