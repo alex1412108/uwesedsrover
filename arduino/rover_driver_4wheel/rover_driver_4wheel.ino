@@ -2,7 +2,10 @@
 
 */
 #include <avr/wdt.h>
+#include <PJON.h>
 
+// <Strategy name> bus(selected device id)
+PJON<ThroughSerial> bus(44);
 
 char INPUTS[19]; 
 enum INPUT_FIELDS {
@@ -71,7 +74,13 @@ const int MOTOR_FAULT3 = 33;
 
 void setup() {
   //wdt_enable(WDTO_2S);
-  Serial.begin(9600);
+  //Serial.begin(9600);
+
+  //setup for pjon
+  Serial.begin(115200);
+  bus.strategy.set_serial(&Serial);
+  bus.begin();
+  bus.set_receiver(receiver_function);
   
   // Configure end effectors.
   pinMode(MOTOR_RF_0, OUTPUT);
@@ -99,23 +108,28 @@ void setup() {
 
 
   //Motor board settings
-pinMode(MOTOR_DECAY, OUTPUT);
-pinMode(MOTOR_SLEEP, OUTPUT);
-pinMode(MOTOR_RESET, OUTPUT);
+  pinMode(MOTOR_DECAY, OUTPUT);
+  pinMode(MOTOR_SLEEP, OUTPUT);
+  pinMode(MOTOR_RESET, OUTPUT);
 
-pinMode(SHDN6V, OUTPUT);  // Digital 6
-pinMode(SHDN12V, OUTPUT);  // Digital 5
+  pinMode(SHDN6V, OUTPUT);  // Digital 6
+  pinMode(SHDN12V, OUTPUT);  // Digital 5
 
-//Fault monitoring
-pinMode(MOTOR_FAULT1, INPUT);
-pinMode(MOTOR_FAULT2, INPUT);
-pinMode(MOTOR_FAULT3, INPUT);
+  //Fault monitoring
+  pinMode(MOTOR_FAULT1, INPUT);
+  pinMode(MOTOR_FAULT2, INPUT);
+  pinMode(MOTOR_FAULT3, INPUT);
 
-digitalWrite(SHDN6V, LOW);  //turns off the 6V power line, set HIGH to turn on if needed
-// 12V power line control from the arduino can only be done if the arduino is powered externaly from the motor board
-digitalWrite(SHDN12V, HIGH); //turns on the 12V power line, set LOW to turn off if not needed.
+  //initialze start settings
+  digitalWrite(SHDN6V, LOW);  //turns off the 6V power line, set HIGH to turn on if needed
+  // 12V power line control from the arduino can only be done if the arduino is powered externaly from the motor board
+  digitalWrite(SHDN12V, HIGH); //turns on the 12V power line, set LOW to turn off if not needed.
+
+  digitalWrite(MOTOR_SLEEP, HIGH);
+  digitalWrite(MOTOR_RESET, HIGH);
+  digitalWrite(MOTOR_DECAY, HIGH); //Low = slow decay, open = mixed decay, high = fast decay
+
 }
-
 
 void loop() {
   /*
@@ -124,27 +138,44 @@ void loop() {
     //wdt_reset();
   } */
   
-  recvWithStartEndMarkers();
+  //recvWithStartEndMarkers();
   
-  if (NEW_INPUT == true) {
+  /*if (NEW_INPUT == true) {
     if (INPUTS[INPUT_A] == char(1)) {
       digitalWrite(LED_BUILTIN, HIGH);  
     } else {
       digitalWrite(LED_BUILTIN, LOW);
     }
+    */
+
+    bus.receive(1000);
+    
     // Update motor signals.
-    control_motor_pwm(MOTOR_RF_0, MOTOR_RF_1, INPUTS[INPUT_RY]);
-    control_motor_pwm(MOTOR_RB_0, MOTOR_RB_1, INPUTS[INPUT_RY]);
-    control_motor_pwm(MOTOR_LF_0, MOTOR_LF_1, INPUTS[INPUT_LY]);
-    control_motor_pwm(MOTOR_LB_0, MOTOR_LB_1, INPUTS[INPUT_LY]);
+    
   
     // Update scoop signal.
     //
-    NEW_INPUT = false;
-  }
+    //NEW_INPUT = false;
+  
 }
 
+void receiver_function(
+  uint8_t *payload, 
+  uint16_t length, 
+  const PJON_Packet_Info &packet_info
+) {
+  
+  control_motor_pwm(MOTOR_RF_0, MOTOR_RF_1, payload[19]);
+  control_motor_pwm(MOTOR_RB_0, MOTOR_RB_1, payload[19]);
+  control_motor_pwm(MOTOR_LF_0, MOTOR_LF_1, payload[17]);
+  control_motor_pwm(MOTOR_LB_0, MOTOR_LB_1, payload[17]);
+  
+  if (MOTOR_FAULT1==LOW) Serial.write("Chip 1 Exceeded Temp or Current Limit\n");
+  if (MOTOR_FAULT2==LOW) Serial.write("Chip 2 Exceeded Temp or Current Limit\n");
+  if (MOTOR_FAULT3==LOW) Serial.write("Chip 3 Exceeded Temp or Current Limit\n");
+}
 
+//may not need this function as using pjon
 void recvWithStartEndMarkers() {
     static boolean recvInProgress = false;
     static byte ndx = 0;
