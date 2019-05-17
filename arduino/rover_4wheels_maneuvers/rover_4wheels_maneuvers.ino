@@ -153,14 +153,15 @@ void loop() {
 
     //forward for 1000 milli-seconds
     go_forward(1000);
-    go_clockwise(1000);
+    go_right_sharp(1000);
     go_forward(1000);
-    go_clockwise(1000);
+    go_right_sharp(1000);
     go_forward(1000);
-    go_clockwise(1000);
+    go_right_sharp(1000);
     go_forward(1000);
-    go_clockwise(1000);
+    go_right_sharp(1000);
 
+    delay(10000); //wait before repeating
 
     //***************************End of Maneuvers***************************
 }
