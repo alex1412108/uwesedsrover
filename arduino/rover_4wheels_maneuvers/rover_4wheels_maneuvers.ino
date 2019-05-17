@@ -141,17 +141,28 @@ void loop() {
     digitalWrite(MOTOR_RESET, HIGH);
     delay(1000);*/
 
-    //Maneuvers
+    //***************************Start of Maneuvers***************************
+
+    //Maneuvers take the form of command(time_for_command_to_run)
+    //After completion of each maneuver, the rover will set motors to stop,
+    //the go_still command is provided in case of more complex future maneuvers
+    
     //Available commands are:
-    //go_forward, go_backward, go_clockwise, go_counterclockwise
+    //go_still, go_forward, go_backward, go_clockwise, go_counterclockwise
     //go_left_sharp, go_right_sharp, go_left_gradual, go_right_gradual
 
     //forward for 1000 milli-seconds
     go_forward(1000);
-    
+    go_clockwise(1000);
+    go_forward(1000);
+    go_clockwise(1000);
+    go_forward(1000);
+    go_clockwise(1000);
+    go_forward(1000);
+    go_clockwise(1000);
 
 
-    
+    //***************************End of Maneuvers***************************
 }
 
 
@@ -230,6 +241,18 @@ void control_motor(int pin0, int pin1, char value) {
     digitalWrite(pin0, LOW);
     digitalWrite(pin1, LOW);
   }
+}
+
+void go_still(int time){
+  control_motor_pwm(MOTOR_RF_0, MOTOR_RF_1, 120);
+  control_motor_pwm(MOTOR_RB_0, MOTOR_RB_1, 120);
+  control_motor_pwm(MOTOR_LF_0, MOTOR_LF_1, 120);
+  control_motor_pwm(MOTOR_LB_0, MOTOR_LB_1, 120);
+  if (MOTOR_FAULT1==LOW) Serial.write("Chip 1 Exceeded Temp or Current Limit\n");
+  if (MOTOR_FAULT2==LOW) Serial.write("Chip 2 Exceeded Temp or Current Limit\n");
+  if (MOTOR_FAULT3==LOW) Serial.write("Chip 3 Exceeded Temp or Current Limit\n");
+  delay(time);
+  
 }
 
 void go_forward(int time){
