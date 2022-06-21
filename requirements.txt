@@ -1,6 +1,6 @@
 google-apputils==0.4.2
 mox==0.5.3
-numpy==1.16.2
+numpy==1.22.0
 pbr==5.1.2
 pjon-cython==11.2.0
 protobuf==3.7.1
